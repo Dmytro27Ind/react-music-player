@@ -21,7 +21,7 @@ export default class SearchService {
             image: track.album.images[1].url,
             duration: track.duration_ms
         }))
-        console.log(tracks)
+        // console.log(tracks)
         return tracks
     }
 }

@@ -4,13 +4,13 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardPlayButton from './CardPlayButton';
 
-function CardDescription({name, author, haveButton}) {
+function CardDescription({name, author, haveButton, url}) {
   return (
     <Box sx={{
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        maxWidth: '50%'
+        maxWidth: {xs: '50%', sm: '100%'}
     }}>
         <CardContent sx={{ p: 1 }}>
             <Typography component="div" variant="h6" noWrap>
@@ -20,7 +20,7 @@ function CardDescription({name, author, haveButton}) {
                 {author}
             </Typography>
         </CardContent>
-        {haveButton && <CardPlayButton/>}
+        {haveButton && <CardPlayButton url={url}/>}
     </Box>
   )
 }
