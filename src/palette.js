@@ -1,18 +1,18 @@
-import { deepPurple, purple, grey } from '@mui/material/colors';
+import { grey, deepOrange} from '@mui/material/colors';
 
 const light = {
     palette: {
         mode: "light",
         primary: {
-            light: purple[100],
-            main: purple[100],
-            dark: purple[300],
+            light: deepOrange[100],
+            main: deepOrange[100],
+            dark: deepOrange[300],
             contrastText: '#000',
         },
         secondary: {
-            light: deepPurple.A100,
-            main: deepPurple.A100,
-            dark: deepPurple.A200,
+            light: deepOrange.A100,
+            main: deepOrange.A100,
+            dark: deepOrange.A200,
             contrastText: '#000',
         },
     },
@@ -26,7 +26,7 @@ const dark = {
             dark: grey[900],
         },
         secondary: {
-            main: deepPurple.A100,
+            main: deepOrange.A100,
         },
     },
 };

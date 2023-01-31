@@ -19,7 +19,7 @@ export default function SearchAppBar() {
                     variant="h6"
                     noWrap
                     component="div"
-                    sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                    sx={{ flexGrow: { sm: 1, md: 1, lg: 2, xl: 3 }, display: { xs: 'none', sm: 'block' } }}
                 >
                     React Music Player
                 </Typography>
