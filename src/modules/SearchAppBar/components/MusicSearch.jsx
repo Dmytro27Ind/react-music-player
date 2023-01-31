@@ -1,7 +1,10 @@
 import React from 'react'
+import { useDispatch } from "react-redux/es/exports";
+import allActions from "../../../store/actions"
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
+import SearchService from '../../../API/SearchService';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -48,6 +51,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function MusicSearch() {
+    const dispatch = useDispatch()
+
+    const searchHandle = async (e) => {
+        if (e.key === 'Enter'){
+            // console.log(e.target.value)
+            let tracks = await SearchService.getSearchResults(e.target.value, 30);
+            // console.log(tracks)
+            e.target.value = ''
+            dispatch(allActions.saveTracks(tracks))
+        }
+    }
+
     return (
         <Search sx={{flexGrow: 2}}>
             <SearchIconWrapper>
@@ -57,6 +72,7 @@ function MusicSearch() {
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
                 sx={{width: '100%'}}
+                onKeyDown={searchHandle}
             />
         </Search>
     )

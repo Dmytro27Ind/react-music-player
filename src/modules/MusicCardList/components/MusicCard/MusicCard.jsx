@@ -11,7 +11,7 @@ export default function MusicCard({name, author, image, ind}) {
 
   return (
     <Card sx={{
-        width: { sm: '23.5%', md: '18.4%', lg: '18%', xl: '14.58%'},
+        width: { xs: '100%', sm: '23.5%', md: '18.4%', lg: '18%', xl: '14.58%'},
         height: {xs: 80, sm: 'auto'},
         '&:hover .play-button': {
             display: {sm: 'flex'}
@@ -20,13 +20,13 @@ export default function MusicCard({name, author, image, ind}) {
       {isUpSm ?
         <Box component="span">
           <CardImage image={image}/>
-          <CardDescription name={name} author={author}/>
+          <CardDescription name={name} author={author} haveButton={true}/>
         </Box>
         :
-        <CardActionArea sx={{display: 'flex', flexDirection: 'row'}}>
+        <CardActionArea sx={{display: 'flex', flexDirection: 'row', alignItems: 'start', justifyContent: 'start'}}>
           <CardImage image={image}/>
-          <CardDescription name={name} author={author}/>
-          <Typography variant='subtitle1' component='div' sx={{p: 2}}>{ind}</Typography>
+          <CardDescription name={name} author={author} haveButton={false}/>
+          <Typography variant='subtitle1' component='div' sx={{p: 2, position: 'absolute', top: 10, right: 0}}>{ind}</Typography>
         </CardActionArea>
       }
     </Card>
