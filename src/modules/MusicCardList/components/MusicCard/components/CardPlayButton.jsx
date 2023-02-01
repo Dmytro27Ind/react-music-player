@@ -2,13 +2,19 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
-import { useTrack } from '../hooks/useTrack';
 
-function CardPlayButton({url}) {
-  const [playing, toggle] = useTrack(url);
+function CardPlayButton({url, toggle, isPlaying}) {
+
+  const f = (url) => {
+    if(isPlaying(url)) {
+      return <PauseIcon sx={{ height: 38, width: 38 }} />
+    } else {
+      return <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+    }
+  }
 
   return (
-    <Button variant='contained' color='secondary' onClick={toggle} className='play-button' sx={{
+    <Button variant='contained' color='secondary' onClick={() => toggle(url)} className='play-button' sx={{
       display: 'none',
       position: 'absolute',
       borderRadius: "50%",
@@ -19,10 +25,13 @@ function CardPlayButton({url}) {
       height: 40,
       p: 1
     }}>
-      {playing ?
+      {/* {isPlaying(url) ?
         <PauseIcon sx={{ height: 38, width: 38 }} />
       :
         <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+      } */}
+      {
+        f(url)
       }
     </Button>
   )

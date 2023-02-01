@@ -5,11 +5,9 @@ import CardImage from './components/CardImage';
 import CardDescription from './components/CardDescription';
 import { CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
-import { useTrack } from './hooks/useTrack';
 
-export default function MusicCard({name, author, image, ind, url}) {
+export default function MusicCard({name, author, image, ind, url, toggle, isPlaying}) {
   const isUpSm = useMediaQuery(theme => theme.breakpoints.up("sm"));
-  const toggle = useTrack(url)[1]
 
   return (
     <Card sx={{
@@ -22,10 +20,10 @@ export default function MusicCard({name, author, image, ind, url}) {
       {isUpSm ?
         <Box component="span">
           <CardImage image={image}/>
-          <CardDescription name={name} author={author} haveButton={true} url={url}/>
+          <CardDescription name={name} author={author} haveButton={true} url={url} toggle={toggle} isPlaying={isPlaying}/>
         </Box>
         :
-        <CardActionArea onClick={toggle} sx={{display: 'flex', flexDirection: 'row', alignItems: 'start', justifyContent: 'start'}}>
+        <CardActionArea sx={{display: 'flex', flexDirection: 'row', alignItems: 'start', justifyContent: 'start'}}>
           <CardImage image={image}/>
           <CardDescription name={name} author={author} haveButton={false}/>
           <Typography variant='subtitle1' component='div' sx={{p: 2, position: 'absolute', top: 10, right: 0}}>{ind}</Typography>

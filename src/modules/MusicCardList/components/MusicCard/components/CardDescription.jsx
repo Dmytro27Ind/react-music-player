@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardPlayButton from './CardPlayButton';
 
-function CardDescription({name, author, haveButton, url}) {
+function CardDescription({name, author, haveButton, url, toggle, isPlaying}) {
   return (
     <Box sx={{
         position: 'relative',
@@ -20,7 +20,7 @@ function CardDescription({name, author, haveButton, url}) {
                 {author}
             </Typography>
         </CardContent>
-        {haveButton && <CardPlayButton url={url}/>}
+        {haveButton && <CardPlayButton url={url} toggle={toggle} isPlaying={isPlaying}/>}
     </Box>
   )
 }
