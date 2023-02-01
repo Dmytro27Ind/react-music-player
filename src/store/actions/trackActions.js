@@ -1,4 +1,4 @@
-import { SAVE_CONTROL_FUN, SAVE_TRACKS } from "./constants";
+import { SAVE_CONTROL_FUN, SAVE_TRACKS, SAVE_CURR_TRACK_IND } from "./constants";
 
 const saveTracks = (tracks) => {
     return {
@@ -14,4 +14,11 @@ const saveControlFun = (control) => {
     }
 }
 
-export {saveTracks, saveControlFun}
+const saveCurrTrackInd = (trackInd) => {
+    return {
+        type: SAVE_CURR_TRACK_IND,
+        payload: trackInd
+    }
+}
+
+export {saveTracks, saveControlFun, saveCurrTrackInd}

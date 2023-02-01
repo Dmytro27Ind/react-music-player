@@ -1,7 +1,9 @@
-import { SAVE_TRACKS, SAVE_CONTROL_FUN } from "../actions/constants";
+import { SAVE_TRACKS, SAVE_CONTROL_FUN, SAVE_CURR_TRACK_IND } from "../actions/constants";
 
 const defaultState = {
-    tracks: []
+    tracks: [],
+    trackInd: undefined,
+    trackUrl: undefined
 }
 
 const trackReducer = (state = defaultState, action) => {
@@ -10,6 +12,8 @@ const trackReducer = (state = defaultState, action) => {
             return {...state, tracks: action.payload};
         case SAVE_CONTROL_FUN:
             return {...state, control: action.payload};
+        case SAVE_CURR_TRACK_IND:
+            return {...state, trackInd: action.payload.trackInd, trackUrl: action.payload.trackUrl};
         default:
             return state;
     }

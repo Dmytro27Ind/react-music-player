@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardPlayButton from './CardPlayButton';
 
-function CardDescription({name, author, haveButton, url, toggle, isPlaying}) {
+function CardDescription({track, haveButton, ind}) {
   return (
     <Box sx={{
         position: 'relative',
@@ -14,13 +14,13 @@ function CardDescription({name, author, haveButton, url, toggle, isPlaying}) {
     }}>
         <CardContent sx={{ p: 1 }}>
             <Typography component="div" variant="h6" noWrap>
-                {name}
+                {track.name}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary" component="div" noWrap>
-                {author}
+                {track.author}
             </Typography>
         </CardContent>
-        {haveButton && <CardPlayButton url={url} toggle={toggle} isPlaying={isPlaying}/>}
+        {haveButton && <CardPlayButton url={track.url} ind={ind}/>}
     </Box>
   )
 }
