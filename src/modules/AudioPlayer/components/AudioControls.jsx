@@ -3,45 +3,27 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import IconButton from '@mui/material/IconButton';
+import { Box } from '@mui/material';
 
 const AudioControls = ({isPlaying, onPlayPauseClick, onPrevClick, onNextClick,}) => (
-	<div className="audio-controls">
-    <button
-      type="button"
-      className="prev"
-      aria-label="Previous"
-      onClick={onPrevClick}
-    >
+	<Box sx={{display: 'flex', gap: 1}}>
+    <IconButton aria-label="Previous" onClick={onPrevClick} color="inherit">
       <SkipPreviousIcon />
-    </button>
+    </IconButton>
     {isPlaying ? (
-      <button
-        type="button"
-        className="pause"
-        onClick={() => onPlayPauseClick(false)}
-        aria-label="Pause"
-      >
+      <IconButton onClick={() => onPlayPauseClick(false)} aria-label="Pause" color="inherit">
         <PauseIcon />
-      </button>
+      </IconButton>
     ) : (
-      <button
-        type="button"
-        className="play"
-        onClick={() => onPlayPauseClick(true)}
-        aria-label="Play"
-      >
+      <IconButton onClick={() => onPlayPauseClick(true)} aria-label="Play" color="inherit">
         <PlayArrowIcon />
-      </button>
+      </IconButton>
     )}
-    <button
-      type="button"
-      className="next"
-      aria-label="Next"
-      onClick={onNextClick}
-    >
+    <IconButton aria-label="Next" onClick={onNextClick} color="inherit">
       <SkipNextIcon />
-    </button>
-  </div>
+    </IconButton>
+  </Box>
 );
 
 export default AudioControls;

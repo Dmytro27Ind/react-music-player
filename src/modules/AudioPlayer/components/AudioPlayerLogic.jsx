@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import allActions from '../../../../../store/actions';
+import allActions from '../../../store/actions';
 import AudioControls from './AudioControls';
+import Typography from '@mui/material/Typography';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import { maxWidth } from '@mui/system';
 
-const AudioPlayer = ({ tracks, trackInd }) => {
+const AudioPlayerLogic = ({ tracks, trackInd }) => {
     const dispatch = useDispatch()
 	// State
     const [trackIndex, setTrackIndex] = useState(trackInd);
@@ -11,7 +16,16 @@ const AudioPlayer = ({ tracks, trackInd }) => {
     const [isPlaying, setIsPlay] = useState(false);
     const setIsPlaying = (b) => {
         setIsPlay(b);
-        dispatch(allActions.saveControlFun({toggle: setIsPlaying, isPlaying: b, nextTrack: toNextTrack, prevTrack: toPrevTrack}))
+        dispatch(allActions.saveControlFun({
+            playTrack: (ind) => {
+                setTrackIndex(ind);
+                audioRef.current.currentTime = 0;
+            },
+            toggle: setIsPlaying,
+            isPlaying: b,
+            nextTrack: toNextTrack,
+            prevTrack: toPrevTrack
+        }))
     }
 
     // Destructure for conciseness
@@ -100,6 +114,7 @@ const AudioPlayer = ({ tracks, trackInd }) => {
             // Set the isReady ref as true for the next pass
             isReady.current = true;
         }
+        dispatch(allActions.saveCurrTrackInd({trackInd: trackIndex, trackUrl: url}))
     }, [trackIndex]);
 
     useEffect(() => {
@@ -111,36 +126,43 @@ const AudioPlayer = ({ tracks, trackInd }) => {
     }, []);
 
 	return (
-        <div className="audio-player">
-			<div className="track-info">
-                <img
-                    className="artwork"
-                    src={image}
-                    alt={`track artwork for ${name} by ${author}`}
-                />
-		        <h2 className="title">{name}</h2>
-                <h3 className="artist">{author}</h3>
-                <AudioControls
-                    isPlaying={isPlaying}
-                    onPrevClick={toPrevTrack}
-                    onNextClick={toNextTrack}
-                    onPlayPauseClick={setIsPlaying}
-                />
-
-                <input
-                    type="range"
-                    value={trackProgress}
-                    step="1"
-                    min="0"
-                    max={duration ? duration : `${duration}`}
-                    className="progress"
-                    onChange={(e) => onScrub(e.target.value)}
-                    onMouseUp={onScrubEnd}
-                    onKeyUp={onScrubEnd}
-                />
-			</div>
-		</div>
+        <Box sx={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
+			<AppBar sx={{ display: 'flex', position: 'relative', alignItems: {xs: 'end', sm: 'center'}, justifyContent: 'center', p: 1, height: 90}}>
+                <Box sx={{width: 80, position: 'absolute', left: 20, display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <img
+                        className="artwork"
+                        src={image}
+                        alt={`track artwork for ${name} by ${author}`}
+                        style={{width: '100%', borderRadius: 50}}
+                    />
+                    <Box sx={{display: 'flex', flexDirection: 'column', maxWidth: {xs: 150, sm: 200, md: 300}}}>
+                        <Typography component="div" variant="h6" noWrap>{name}</Typography>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" noWrap>{author}</Typography>
+                    </Box>
+                </Box>
+                <Box sx={{display: 'flex', flexDirection: 'column', width: {sm: '40%', md: '50%'}, alignItems: 'center', marginTop: 1, marginRight: {xs: 2, sm: 0}, marginLeft: {sm: 4, md: 0}}}>
+                    <AudioControls
+                        isPlaying={isPlaying}
+                        onPrevClick={toPrevTrack}
+                        onNextClick={toNextTrack}
+                        onPlayPauseClick={setIsPlaying}
+                    />
+                    <Slider
+                        aria-label="Temperature"
+                        defaultValue={trackProgress}
+                        value={trackProgress}
+                        step={1}
+                        max={duration ? duration : `${duration}`}
+                        onChange={(e) => onScrub(e.target.value)}
+                        onMouseUp={onScrubEnd}
+                        onKeyUp={onScrubEnd}
+                        color="bw"
+                        sx={{display: {xs: 'none', sm: 'block'}}}
+                    />
+                </Box>
+			</AppBar>
+		</Box>
     );
 }
 
-export default AudioPlayer;
+export default AudioPlayerLogic;

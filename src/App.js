@@ -9,13 +9,6 @@ import AudioPlayer from './modules/AudioPlayer/AudioPlayer';
 
 function App() {
   const theme = useSelector(state => state.theme.theme)
-  const tracks = useSelector(state => state.track.tracks)
-  const trackInd = useSelector(state => state.track.trackInd)
-
-  const getAudioPlayer = () => {
-    if (tracks.length && trackInd != undefined)
-      return <AudioPlayer tracks={tracks} trackInd={trackInd}/>
-  }
 
   return (
     <div className="App">
@@ -23,7 +16,7 @@ function App() {
         <CssBaseline />
         <SearchAppBar />
         <MainPage />
-        {getAudioPlayer()}
+        <AudioPlayer />
       </ThemeProvider>
     </div>
   );
