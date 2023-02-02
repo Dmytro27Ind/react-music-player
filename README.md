@@ -7,14 +7,11 @@ https://dmytro27ind.github.io/react-music-player/
 
 ## Screenshots
 
-### Dark theme
-<p float="left">
-  <img src="https://github.com/Dmytro27Ind/images/blob/main/react-music-player-1.PNG" width="500" />
-  <img src="https://github.com/Dmytro27Ind/images/blob/main/react-music-player-3.PNG" width="300" />
-</p>
+![App Screenshot](https://github.com/Dmytro27Ind/images/blob/main/react-music-player-1.PNG)
+![App Screenshot](https://github.com/Dmytro27Ind/images/blob/main/react-music-player-2.PNG)
 
-### Light theme
+### For mobile
 <p float="left">
-  <img src="https://github.com/Dmytro27Ind/images/blob/main/react-music-player-2.PNG" width="500" />
-  <img src="https://github.com/Dmytro27Ind/images/blob/main/react-music-player-4.PNG" width="300" />
+  <img src="https://github.com/Dmytro27Ind/images/blob/main/react-music-player-3.PNG" width="400" />
+  <img src="https://github.com/Dmytro27Ind/images/blob/main/react-music-player-4.PNG" width="400" />
 </p>
