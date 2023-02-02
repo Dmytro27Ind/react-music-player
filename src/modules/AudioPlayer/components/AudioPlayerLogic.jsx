@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
-import { maxWidth } from '@mui/system';
+import './ImageRotation.css';
+import Image from 'mui-image';
 
 const AudioPlayerLogic = ({ tracks, trackInd }) => {
     const dispatch = useDispatch()
@@ -88,7 +89,8 @@ const AudioPlayerLogic = ({ tracks, trackInd }) => {
 
     useEffect(() => {
         dispatch(allActions.saveControlFun({toggle: setIsPlaying, isPlaying: isPlaying, nextTrack: toNextTrack, prevTrack: toPrevTrack}))
-    }, [])
+        // eslint-disable-next-line
+    }, [dispatch])
 
     useEffect(() => {
         if (isPlaying) {
@@ -98,6 +100,7 @@ const AudioPlayerLogic = ({ tracks, trackInd }) => {
             clearInterval(intervalRef.current);
             audioRef.current.pause();
         }
+        // eslint-disable-next-line
     }, [isPlaying]);
 
     // Handle setup when changing tracks
@@ -115,6 +118,7 @@ const AudioPlayerLogic = ({ tracks, trackInd }) => {
             isReady.current = true;
         }
         dispatch(allActions.saveCurrTrackInd({trackInd: trackIndex, trackUrl: url}))
+        // eslint-disable-next-line
     }, [trackIndex]);
 
     useEffect(() => {
@@ -128,12 +132,13 @@ const AudioPlayerLogic = ({ tracks, trackInd }) => {
 	return (
         <Box sx={{position: 'fixed', bottom: 0, left: 0, right: 0}}>
 			<AppBar sx={{ display: 'flex', position: 'relative', alignItems: {xs: 'end', sm: 'center'}, justifyContent: 'center', p: 1, height: 90}}>
-                <Box sx={{width: 80, position: 'absolute', left: 20, display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <img
-                        className="artwork"
+                <Box sx={{ position: 'absolute', left: 20, display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Image
                         src={image}
                         alt={`track artwork for ${name} by ${author}`}
-                        style={{width: '100%', borderRadius: 50}}
+                        width={80}
+                        style={{animation: undefined}}
+                        sx={{borderRadius: 50, animation: 'rotation 5s infinite linear', animationPlayState: isPlaying? 'running':'paused'}}
                     />
                     <Box sx={{display: 'flex', flexDirection: 'column', maxWidth: {xs: 150, sm: 200, md: 300}}}>
                         <Typography component="div" variant="h6" noWrap>{name}</Typography>

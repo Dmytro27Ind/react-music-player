@@ -55,9 +55,8 @@ function MusicSearch() {
 
     const searchHandle = async (e) => {
         if (e.key === 'Enter'){
-            // console.log(e.target.value)
             let tracks = await SearchService.getSearchResults(e.target.value, 30);
-            // console.log(tracks)
+            dispatch(allActions.saveSearchInput(e.target.value))
             e.target.value = ''
             dispatch(allActions.saveTracks(tracks))
         }

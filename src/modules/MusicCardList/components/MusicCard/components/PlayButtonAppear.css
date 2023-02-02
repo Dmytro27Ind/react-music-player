@@ -1,0 +1,10 @@
+@keyframes appear {
+    from {
+        transform: scale(0.5) translate(0px, 100px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translate(0px, 0px);
+        opacity: 1;
+    }
+}

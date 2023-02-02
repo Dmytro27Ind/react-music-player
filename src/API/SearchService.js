@@ -2,7 +2,7 @@ import getNewToken from './getNewToken'
 import axios from 'axios';
 
 export default class SearchService {
-    static async getSearchResults(query, limit=10) {
+    static async getSearchResults(query, limit=10, offset=0) {
         let tracks = []
         let token = await getNewToken()
 
@@ -12,7 +12,7 @@ export default class SearchService {
                 'Content-Type': 'application/json'
             }
         }
-        const response = await axios.get(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=${limit}`, config)
+        const response = await axios.get(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=${limit}&offset=${offset}`, config)
         // console.log(response.data.tracks)
         tracks = response.data.tracks.items.map(track => ({
             name: track.name,

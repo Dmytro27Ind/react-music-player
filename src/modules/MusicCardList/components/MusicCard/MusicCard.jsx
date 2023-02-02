@@ -15,7 +15,7 @@ export default function MusicCard({ind, track}) {
   const dispatch = useDispatch()
 
   const cardActionClick = () => {
-    if(track.url != trackUrl){
+    if(track.url !== trackUrl){
       dispatch(allActions.saveCurrTrackInd({trackInd: ind, trackUrl: track.url}))
       control?.playTrack(ind)
     }
